@@ -19,7 +19,7 @@ jobs:
       - name: Create PR using GitHub CLI
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # REPLACE THESE with real GitHub usernames
+          TEST_BRANCH: "test"
           REVIEWER_1: "peterpaularetex-creator"
           REVIEWER_2: "Aaron-anime"
         run: |
