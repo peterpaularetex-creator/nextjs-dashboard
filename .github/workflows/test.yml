@@ -22,7 +22,7 @@ jobs:
           TEST_BRANCH: "test"
           ASSIGNEE_USER: "peterpaularetex-creator" 
           REVIEWER_1: "peterpaularetex-creator"
-          REVIEWER_2: "Aaron-anime"
+          # REVIEWER_2: "Aaron-anime"
         run: |
           # 1. Identify the branch name
           BRANCH_NAME="${GITHUB_REF#refs/heads/}"
@@ -48,5 +48,5 @@ jobs:
             --base "$TEST_BRANCH" \
             --head "$BRANCH_NAME" \
             --label "$SELECTED_LABEL" \
-            --reviewer "$REVIEWER_1,$REVIEWER_2" \
+            --reviewer "$REVIEWER_1" \
             --assignee "$ASSIGNEE_USER"
