@@ -22,7 +22,7 @@ jobs: #top-level container that groups the tasks this workflow will run
           TEST_BRANCH: "test"
           ASSIGNEE_USER: "peterpaularetex-creator" 
           REVIEWER_1: "peterpaularetex-creator"
-          REVIEWER_2: "aaron-anime"
+          REVIEWER_2: "Aaron-anime"
         run: |
         
           BRANCH_NAME="${GITHUB_REF#refs/heads/}"
@@ -45,5 +45,5 @@ jobs: #top-level container that groups the tasks this workflow will run
             --base "$TEST_BRANCH" \
             --head "$BRANCH_NAME" \
             --label "$PR_LABEL" \
-            --reviewer "$REVIEWER_1, $REVIEWER_2" \
+            --reviewer "$REVIEWER_1,$REVIEWER_2" \
             --assignee "$ASSIGNEE_USER"
