@@ -1,0 +1,42 @@
+name: Auto PR via main
+
+on:
+  push:
+    branches:
+      - 'hotfix/**'
+      - 'bug/**'
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create PR using GitHub CLI
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # REPLACE THESE with real GitHub usernames
+          REVIEWER_1: "peterpaularetex-creator"
+          REVIEWER_2: "Aaron-anime"
+        run: |
+          # 1. Identify the branch name
+          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+          
+          # 2. Pick a random label from your list of 5
+          LABELS=("bug" "hotfix" "enhancement" "duplicate" "documentation")
+          SELECTED_LABEL=${LABELS[$RANDOM % ${#LABELS[@]}]}
+          
+          # 3. Create the PR
+          # --assignee "@me" assigns the person who pushed the code
+          gh pr create \
+            --title "Automated PR: $BRANCH_NAME" \
+            --body "This PR was automatically generated for branch $BRANCH_NAME." \
+            --base main \
+            --head "$BRANCH_NAME" \
+            --label "$SELECTED_LABEL" \
+            --reviewer "$REVIEWER_1,$REVIEWER_2" \
+            --assignee "@me"
