@@ -47,6 +47,6 @@ jobs:
             --body "This PR was automatically generated for branch $BRANCH_NAME." \
             --base "$TEST_BRANCH" \
             --head "$BRANCH_NAME" \
-            --label "$SELECTED_LABEL" \
+            --label "$PR_LABEL" \
             --reviewer "$REVIEWER_1" \
             --assignee "$ASSIGNEE_USER"
