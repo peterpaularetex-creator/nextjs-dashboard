@@ -20,6 +20,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TEST_BRANCH: "test"
+          ASSIGNEE_USER: "peterpaularetex-creator" 
           REVIEWER_1: "peterpaularetex-creator"
           REVIEWER_2: "Aaron-anime"
         run: |
@@ -30,13 +31,12 @@ jobs:
           LABELS=("bug" "hotfix" "enhancement" "duplicate" "documentation")
           SELECTED_LABEL=${LABELS[$RANDOM % ${#LABELS[@]}]}
           
-          # 3. Create the PR
-          # --assignee "@me" assigns the person who pushed the code
+          # 3. Create the PR with correct base branch and assignee
           gh pr create \
             --title "Automated PR: $BRANCH_NAME" \
             --body "This PR was automatically generated for branch $BRANCH_NAME." \
-            --base main \
+            --base "$TEST_BRANCH" \
             --head "$BRANCH_NAME" \
             --label "$SELECTED_LABEL" \
             --reviewer "$REVIEWER_1,$REVIEWER_2" \
-            --assignee "@me"
+            --assignee "$ASSIGNEE_USER"
