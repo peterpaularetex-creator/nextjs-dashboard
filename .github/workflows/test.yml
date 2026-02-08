@@ -37,5 +37,5 @@ jobs:
             --base "$TEST_BRANCH" \
             --head "$BRANCH_NAME" \
             --label "$SELECTED_LABEL" \
-            --reviewer "$REVIEWER_1,$REVIEWER_2" \
+            --reviewer "$REVIEWER_1" \
             --assignee "$ASSIGNEE_USER"
