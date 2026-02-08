@@ -28,8 +28,18 @@ jobs:
           BRANCH_NAME="${GITHUB_REF#refs/heads/}"
           
           # 2. Pick a random label from your list of 5
-          LABELS=("bug" "hotfix" "enhancement" "duplicate" "documentation")
-          SELECTED_LABEL=${LABELS[$RANDOM % ${#LABELS[@]}]}
+          if [[ "$BRANCH_NAME" == bug/* ]]; then
+            PR_LABEL="bug"
+          elif [[ "$BRANCH_NAME" == hotfix/* ]]; then
+            PR_LABEL="hotfix"
+          elif [[ "$BRANCH_NAME" == enhancement/* ]]; then
+            PR_LABEL="enhancement"
+          elif [[ "$BRANCH_NAME" == duplicate/* ]]; then
+            PR_LABEL="duplicate"
+          else
+            # Fallback to 'documentation' if something unexpected happens
+            PR_LABEL="documentation" 
+          fi
           
           # 3. Create the PR with correct base branch and assignee
           gh pr create \
